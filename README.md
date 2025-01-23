@@ -9,8 +9,6 @@
 
 ## Project Scenario
 
-u
-
 Recipe Hub is a web application that allows users to:
 
 - Browse and search recipes
