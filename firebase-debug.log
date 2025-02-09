@@ -1,0 +1,31 @@
+[debug] [2025-02-09T14:14:29.247Z] ----------------------------------------------------------------------
+[debug] [2025-02-09T14:14:29.250Z] Command:       C:\nvm4w\nodejs\node.exe C:\Users\jamal\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-02-09T14:14:29.250Z] CLI Version:   13.27.0
+[debug] [2025-02-09T14:14:29.251Z] Platform:      win32
+[debug] [2025-02-09T14:14:29.251Z] Node Version:  v18.20.6
+[debug] [2025-02-09T14:14:29.251Z] Time:          Sun Feb 09 2025 19:14:29 GMT+0500 (Pakistan Standard Time)
+[debug] [2025-02-09T14:14:29.252Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-02-09T14:14:29.381Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-02-09T14:14:29.381Z] > authorizing via signed-in user (usanamecountry@gmail.com)
+[debug] [2025-02-09T14:14:29.381Z] [iam] checking project recipe-finder-jamalihassan0307 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-02-09T14:14:29.383Z] Checked if tokens are valid: true, expires at: 1739114017744
+[debug] [2025-02-09T14:14:29.383Z] Checked if tokens are valid: true, expires at: 1739114017744
+[debug] [2025-02-09T14:14:29.385Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/recipe-finder-jamalihassan0307:testIamPermissions [none]
+[debug] [2025-02-09T14:14:29.385Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/recipe-finder-jamalihassan0307:testIamPermissions x-goog-quota-user=projects/recipe-finder-jamalihassan0307
+[debug] [2025-02-09T14:14:29.385Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/recipe-finder-jamalihassan0307:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-02-09T14:14:31.140Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/recipe-finder-jamalihassan0307:testIamPermissions 200
+[debug] [2025-02-09T14:14:31.141Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/recipe-finder-jamalihassan0307:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-02-09T14:14:31.141Z] Checked if tokens are valid: true, expires at: 1739114017744
+[debug] [2025-02-09T14:14:31.142Z] Checked if tokens are valid: true, expires at: 1739114017744
+[debug] [2025-02-09T14:14:31.143Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/recipe-finder-jamalihassan0307 [none]
+[debug] [2025-02-09T14:14:31.821Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/recipe-finder-jamalihassan0307 200
+[debug] [2025-02-09T14:14:31.821Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/recipe-finder-jamalihassan0307 {"projectId":"recipe-finder-jamalihassan0307","projectNumber":"1082078187970","displayName":"recipe-finder","name":"projects/recipe-finder-jamalihassan0307","resources":{"hostingSite":"recipe-finder-jamalihassan0307"},"state":"ACTIVE","etag":"1_38dd47c5-e94c-4cce-a551-6efb513223b7"}
+[info] 
+[info] === Deploying to 'recipe-finder-jamalihassan0307'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-02-09T14:14:31.849Z] Checked if tokens are valid: true, expires at: 1739114017744
+[debug] [2025-02-09T14:14:31.850Z] Checked if tokens are valid: true, expires at: 1739114017744
+[debug] [2025-02-09T14:14:31.851Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/recipe-finder-jamalihassan0307/versions [none]
+[debug] [2025-02-09T14:14:31.851Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/recipe-finder-jamalihassan0307/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
