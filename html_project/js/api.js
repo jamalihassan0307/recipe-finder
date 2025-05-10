@@ -103,6 +103,7 @@ async function login(email, password) {
                 id: user.id,
                 email: user.email,
                 name: user.name || email.split('@')[0],
+                profileImage: user.profileImage || '../assets/default-profile.png',
                 isAuthenticated: true
             };
             localStorage.setItem('user', JSON.stringify(userData));
@@ -132,5 +133,51 @@ function isAuthenticated() {
 function checkAuth() {
     if (!isAuthenticated()) {
         window.location.href = 'login.html';
+    }
+}
+
+// Profile-related functions
+async function updateProfile(profileData) {
+    try {
+        const response = await fetch(`${API_URL}/users/profile`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(profileData)
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message || 'Failed to update profile');
+        }
+
+        return data;
+    } catch (error) {
+        console.error('Update profile error:', error);
+        throw error;
+    }
+}
+
+async function updateProfileImage(formData) {
+    try {
+        const response = await fetch(`${API_URL}/users/profile/image`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: formData
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message || 'Failed to update profile image');
+        }
+
+        return data;
+    } catch (error) {
+        console.error('Update profile image error:', error);
+        throw error;
     }
 } 
