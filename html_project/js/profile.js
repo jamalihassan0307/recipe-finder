@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if user is authenticated
+    if (!isAuthenticated()) {
+        window.location.href = 'login.html';
+        return;
+    }
+
     const profileForm = document.getElementById('profileForm');
     const profileImage = document.getElementById('profileImage');
     const changeImageBtn = document.getElementById('changeImageBtn');
