@@ -139,13 +139,24 @@ function checkAuth() {
 // Profile-related functions
 async function updateProfile(profileData) {
     try {
-        const response = await fetch(`${API_URL}/users/profile`, {
+        const user = getCurrentUser();
+        if (!user) {
+            throw new Error('User not authenticated');
+        }
+
+        const response = await fetch(`${API_URL}${ENDPOINTS.PROFILE}/${user.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
-            body: JSON.stringify(profileData)
+            body: JSON.stringify({
+                name: profileData.name,
+                username: profileData.username,
+                email: profileData.email,
+                password: profileData.newPassword || undefined,
+                currentPassword: profileData.currentPassword || undefined
+            })
         });
 
         const data = await response.json();
@@ -153,7 +164,19 @@ async function updateProfile(profileData) {
             throw new Error(data.message || 'Failed to update profile');
         }
 
-        return data;
+        // Update local storage with new user data
+        const updatedUser = {
+            ...user,
+            name: profileData.name,
+            username: profileData.username,
+            email: profileData.email
+        };
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+
+        return {
+            success: true,
+            user: updatedUser
+        };
     } catch (error) {
         console.error('Update profile error:', error);
         throw error;

@@ -19,11 +19,32 @@ document.addEventListener('DOMContentLoaded', () => {
     profileForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const currentPassword = document.getElementById('currentPassword').value;
+
+        // Validate passwords if changing
+        if (newPassword || confirmPassword || currentPassword) {
+            if (!currentPassword) {
+                showNotification('Please enter your current password', 'error');
+                return;
+            }
+            if (newPassword !== confirmPassword) {
+                showNotification('New passwords do not match', 'error');
+                return;
+            }
+            if (newPassword.length < 4) {
+                showNotification('New password must be at least 4 characters', 'error');
+                return;
+            }
+        }
+
         const formData = {
-            fullName: document.getElementById('fullName').value,
+            name: document.getElementById('name').value,
             username: document.getElementById('username').value,
             email: document.getElementById('email').value,
-            password: document.getElementById('password').value || undefined // Only send if changed
+            currentPassword: currentPassword || undefined,
+            newPassword: newPassword || undefined
         };
 
         try {
@@ -32,6 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 showNotification('Profile updated successfully!', 'success');
                 // Update navbar profile info
                 updateNavbarProfile(response.user);
+                // Clear password fields
+                document.getElementById('currentPassword').value = '';
+                document.getElementById('newPassword').value = '';
+                document.getElementById('confirmPassword').value = '';
             } else {
                 showNotification(response.message || 'Failed to update profile', 'error');
             }
@@ -87,13 +112,14 @@ async function loadUserProfile() {
         const user = await getCurrentUser();
         if (user) {
             // Populate form fields
-            document.getElementById('fullName').value = user.fullName || '';
+            document.getElementById('name').value = user.name || '';
             document.getElementById('username').value = user.username || '';
             document.getElementById('email').value = user.email || '';
+            document.getElementById('role').value = user.role_name || 'user';
             
             // Set profile image
             const profileImage = document.getElementById('profileImage');
-            profileImage.src = user.profileImage || '../assets/default-profile.png';
+            profileImage.src = user.profile_picture || '../assets/default-profile.png';
             
             // Update navbar profile info
             updateNavbarProfile(user);
@@ -113,10 +139,10 @@ function updateNavbarProfile(user) {
         const username = navbarProfile.querySelector('.username');
         
         if (profilePicture) {
-            profilePicture.src = user.profileImage || '../assets/default-profile.png';
+            profilePicture.src = user.profile_picture || '../assets/default-profile.png';
         }
         if (username) {
-            username.textContent = user.username || user.fullName;
+            username.textContent = user.name || user.username;
         }
     }
 }
